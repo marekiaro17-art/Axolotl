@@ -1,0 +1,9 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: axolotl-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    restart: unless-stopped
