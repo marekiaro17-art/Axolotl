@@ -2,8 +2,38 @@ services:
   web:
     image: nginx:alpine
     container_name: axolotl-web
-    ports:
-      - "8080:80"
     volumes:
       - ./web:/usr/share/nginx/html:ro
     restart: unless-stopped
+    labels:
+      - autoheal=true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  status:
+    build: ./status
+    container_name: axolotl-status
+    ports:
+      - "8080:8080"
+    depends_on:
+      - web
+    restart: unless-stopped
+    labels:
+      - autoheal=true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/api/status"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: axolotl-autoheal
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
