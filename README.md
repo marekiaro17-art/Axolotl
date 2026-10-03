@@ -17,7 +17,7 @@ Una pagina web mostra lo stato di quattro servizi in tempo reale. Con il pulsant
 
 ## Come è fatto
 
-mermaid
+```mermaid
 flowchart LR
     V[Visitatore] -->|HTTPS| CF[Cloudflare]
     CF --> T[tunnel: cloudflared]
@@ -32,6 +32,7 @@ flowchart LR
     P[Push su GitHub] --> A[GitHub Actions]
     A -->|SSH| S[Server Oracle Cloud]
     S --> D[Docker Compose]
+```
 
 
 ## Monitoraggio
