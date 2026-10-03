@@ -28,7 +28,7 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     depends_on:
       - web
     restart: unless-stopped
@@ -39,6 +39,16 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: axolotl-tunnel
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    depends_on:
+      - status
+    restart: unless-stopped
 
   autoheal:
     image: willfarrell/autoheal:latest
