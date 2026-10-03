@@ -24,7 +24,7 @@ services:
     labels:
       - autoheal=true
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/api/status"]
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/api/status"]
       interval: 10s
       timeout: 3s
       retries: 3

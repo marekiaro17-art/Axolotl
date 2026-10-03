@@ -17,4 +17,4 @@ jobs:
           script: |
             cd $HOME/progetti/axolotl
             git pull origin main
-            docker compose up -d --build
+            docker compose rm -sf status && docker compose up -d --build
