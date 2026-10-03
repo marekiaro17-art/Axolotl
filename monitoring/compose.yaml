@@ -77,6 +77,7 @@ services:
       - GF_ANALYTICS_CHECK_FOR_UPDATES=false
       - GF_USERS_DEFAULT_THEME=dark
       - GF_PLUGINS_PREINSTALL_DISABLED=true
+      - GF_SECURITY_ALLOW_EMBEDDING=true
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning:ro

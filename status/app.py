@@ -127,6 +127,18 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--rule);color:v
 a{color:var(--skin)}
 @media (max-width:600px){.ds{display:none}.nm{font-size:1.05rem}.stl{font-size:.85rem}.up{font-size:.72rem}}
 @media (prefers-reduced-motion:reduce){.gill{animation:none}.slot.fix .limb{animation:none;transform:scale(.6)}.limb{transition:none}}
+
+#monitor{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.6rem}
+#monitor h2{font-size:1.5rem;margin:0 0 .4rem;font-weight:600}
+.mon-lede{max-width:40rem;color:var(--mute);margin:0 0 1.2rem;font-size:1.02rem}
+.mon-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:.6rem}
+.mon-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.mon-stats iframe,.mon-grid iframe{width:100%;border:1px solid var(--rule);border-radius:6px;background:#111b25;display:block}
+.mon-stats iframe{height:120px}
+.mon-grid iframe{height:260px}
+.mon-btn{display:inline-block;margin-top:1rem;padding:.55rem 1rem;border-radius:6px;background:#f2994a;color:#1a1005;text-decoration:none;font-weight:600}
+.mon-note{color:var(--mute);font-size:.9rem;margin:.8rem 0 0}
+@media(max-width:620px){.mon-stats{grid-template-columns:repeat(2,1fr)}.mon-grid{grid-template-columns:1fr}}
 </style></head><body><div class="page">
 <header>
 <h1>Axolotl</h1>
@@ -142,6 +154,14 @@ a{color:var(--skin)}
 <button id="btn" type="button">Simula un guasto</button>
 <p class="note" id="note">Il guasto è simulato e nessun server viene spento. I controlli sui servizi sono reali.</p>
 </main>
+<section id="monitor" aria-labelledby="monitor-t">
+<h2 id="monitor-t">Monitoraggio in tempo reale</h2>
+<p class="mon-lede">Questi grafici mostrano il mio server Oracle Cloud su cui gira Axolotl: CPU, memoria, disco e container. I dati sono raccolti da Prometheus e disegnati da Grafana, e si aggiornano ogni 30 secondi.</p>
+<div class="mon-stats"><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=1" title="Container attivi" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=2" title="Uptime server" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=3" title="RAM usata" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=4" title="Disco usato" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe></div>
+<div class="mon-grid"><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=5" title="Uso CPU del server" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=6" title="Memoria per container" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=7" title="CPU per container" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=8" title="RAM del server" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=9" title="Disco usato nel tempo" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><iframe src="https://monitor.speedrace.dpdns.org/d-solo/axolotl-overview/axolotl?orgId=1&amp;theme=dark&amp;refresh=30s&amp;from=now-6h&amp;to=now&amp;panelId=10" title="Uptime per container" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe></div>
+<a class="mon-btn" href="https://monitor.speedrace.dpdns.org/d/axolotl-overview" target="_blank" rel="noopener">Apri la dashboard completa &rarr;</a>
+<p class="mon-note">Dati in sola lettura.</p>
+</section>
 <footer>
 <a href="https://github.com/marekiaro17-art/Axolotl" target="_blank" rel="noopener">Codice e documentazione su GitHub</a>.
 Costruito con Docker, nginx, Python, GitHub Actions, autoheal e fail2ban.
@@ -254,7 +274,7 @@ load();setInterval(load,2000);
 })();
 </script></body></html>"""
 
-CSP = "default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:"
+CSP = "default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; frame-src https://monitor.speedrace.dpdns.org"
 
 
 class H(BaseHTTPRequestHandler):
